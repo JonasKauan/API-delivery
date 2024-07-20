@@ -20,6 +20,10 @@ public class Item {
     @JoinColumn(name = "fkrestaurante")
     private Restaurante restaurante;
 
+    @ManyToOne
+    @JoinColumn(name = "fkcategoria_item")
+    private CategoriaItem categoriaItem;
+
     private String nome;
     private Double valor;
 }

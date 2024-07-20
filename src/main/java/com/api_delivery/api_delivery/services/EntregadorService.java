@@ -1,10 +1,10 @@
 package com.api_delivery.api_delivery.services;
 
+import com.api_delivery.api_delivery.dtos.entregador.EntregadorRequest;
+import com.api_delivery.api_delivery.dtos.entregador.EntregadorResponse;
 import com.api_delivery.api_delivery.dtos.usuario.AlterarSenhaRequest;
-import com.api_delivery.api_delivery.dtos.usuario.UsuarioRequest;
-import com.api_delivery.api_delivery.dtos.usuario.UsuarioResponse;
-import com.api_delivery.api_delivery.models.Usuario;
-import com.api_delivery.api_delivery.repositories.UsuarioRepository;
+import com.api_delivery.api_delivery.models.Entregador;
+import com.api_delivery.api_delivery.repositories.EntregadorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
@@ -16,10 +16,10 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UsuarioService {
-    private final UsuarioRepository repository;
+public class EntregadorService {
+    private final EntregadorRepository repository;
 
-    public UsuarioResponse cadastrar(UsuarioRequest dto) {
+    public EntregadorResponse cadastrar(EntregadorRequest dto) {
         if(repository.existsByEmail(dto.email()))
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
@@ -32,67 +32,69 @@ public class UsuarioService {
                     "O celular fornecido já foi cadastrado"
             );
 
-        var usuario = new Usuario();
-        BeanUtils.copyProperties(dto, usuario);
-        return new UsuarioResponse(repository.save(usuario));
+        var entregador = new Entregador();
+        BeanUtils.copyProperties(dto, entregador);
+        return new EntregadorResponse(repository.save(entregador));
     }
 
-    public List<UsuarioResponse> getUsuariosResponse() {
+    public List<EntregadorResponse> getEntregadoresResponse() {
         return repository.findAllResponse();
     }
 
-    public UsuarioResponse getUsuarioResponsePorId(UUID id) {
-        return new UsuarioResponse(getUsuarioPorId(id));
+    public EntregadorResponse getEntregadorResponsePorId(UUID id) {
+        return new EntregadorResponse(getEntregadorPorId(id));
     }
 
-    public Usuario getUsuarioPorId(UUID id) {
-        if(!repository.existsById(id))
+    public Entregador getEntregadorPorId(UUID id) {
+        if(!repository.existsById(id)) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "Usuário com o id fornecido não existe"
+                    "Entregador com o id fornecido não existe"
             );
+        }
 
         return repository.findById(id).get();
     }
 
-    public UsuarioResponse alterar(UUID id, UsuarioRequest dto) {
-        var usuario = getUsuarioPorId(id);
+    public EntregadorResponse alterar(UUID id, EntregadorRequest dto) {
+        var entregador = getEntregadorPorId(id);
 
-        if(!dto.email().equals(usuario.getEmail()) && repository.existsByEmail(dto.email()))
+        if(!dto.email().equals(entregador.getEmail()) && repository.existsByEmail(dto.email()))
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "O e-mail fornecido já foi cadastrado"
             );
 
-        if(!dto.celular().equals(usuario.getCelular()) && repository.existsByCelular(dto.celular()))
+        if(!dto.celular().equals(entregador.getCelular()) && repository.existsByCelular(dto.celular()))
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "O celular fornecido já foi cadastrado"
             );
 
-        BeanUtils.copyProperties(dto, usuario);
-        return new UsuarioResponse(repository.save(usuario));
+        BeanUtils.copyProperties(dto, entregador);
+        return new EntregadorResponse(repository.save(entregador));
     }
 
     public void alterarSenha(UUID id, AlterarSenhaRequest dto) {
-        var usuario = getUsuarioPorId(id);
+        var entregador = getEntregadorPorId(id);
 
-        if(!usuario.getSenha().equals(dto.senhaAntiga()))
+        if(!entregador.getSenha().equals(dto.senhaAntiga()))
             throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN,
                     "A senha antiga está incorreta"
             );
 
-        usuario.setSenha(dto.senhaNova());
-        repository.save(usuario);
+        entregador.setSenha(dto.senhaNova());
+        repository.save(entregador);
     }
 
     public void deletarPorId(UUID id) {
         if(!repository.existsById(id))
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
-                    "Usuário com o id fornecido não existe"
+                    "Entregador com o id fornecido não existe"
             );
+
 
         repository.deleteById(id);
     }

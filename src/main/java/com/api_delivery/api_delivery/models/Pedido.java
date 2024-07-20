@@ -18,12 +18,19 @@ public class Pedido {
     private UUID idPedido;
 
     @ManyToOne
+    @JoinColumn(name = "fkrestaurante")
+    private Restaurante restaurante;
+
+    @ManyToOne
     @JoinColumn(name = "fkusuario")
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "fkentregador")
     private Entregador entregador;
+
     private Double valor;
     private LocalDateTime dataHora;
+    private Integer avaliacaoRestaurante;
+    private Integer avaliacaoEntrega;
 }

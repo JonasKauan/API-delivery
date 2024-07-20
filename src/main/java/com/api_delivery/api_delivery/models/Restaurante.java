@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -15,6 +16,15 @@ public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idRestaurante;
+
+    @ManyToOne
+    @JoinColumn(name = "fkcategoria_restaurante")
+    private CategoriaRestaurante categoriaRestaurante;
+
     private String nome;
-    private Double avaliacao;
+    private LocalDate dataEntradaPlataforma;
+
+    public Restaurante() {
+        this.dataEntradaPlataforma = LocalDate.now();
+    }
 }
