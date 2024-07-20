@@ -6,9 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record RestauranteRequest(
-
         @NotNull
         UUID categoriaRestaurante,
         @NotBlank
-        String nome
+        String nome,
+        double taxaEntrega
 ) {}

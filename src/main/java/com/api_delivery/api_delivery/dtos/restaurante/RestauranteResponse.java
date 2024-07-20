@@ -14,11 +14,13 @@ public class RestauranteResponse {
     private final CategoriaRestauranteResponse categoriaRestaurante;
     private final String nome;
     private final LocalDate dataEntradaPlataforma;
+    private final Double taxaEntrega;
 
     public RestauranteResponse(Restaurante restaurante) {
         this.idRestaurante = restaurante.getIdRestaurante();
         this.categoriaRestaurante = new CategoriaRestauranteResponse(restaurante.getCategoriaRestaurante());
         this.nome = restaurante.getNome();
         this.dataEntradaPlataforma = restaurante.getDataEntradaPlataforma();
+        this.taxaEntrega = restaurante.getTaxaEntrega();
     }
 }

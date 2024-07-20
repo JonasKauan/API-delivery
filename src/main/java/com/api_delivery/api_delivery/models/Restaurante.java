@@ -23,6 +23,7 @@ public class Restaurante {
 
     private String nome;
     private LocalDate dataEntradaPlataforma;
+    private Double taxaEntrega;
 
     public Restaurante() {
         this.dataEntradaPlataforma = LocalDate.now();

@@ -24,5 +24,6 @@ public class FormaPagamentoRestaurante {
     @JoinColumn(name = "fkrestaurante")
     private Restaurante restaurante;
 
-    private Integer percentualDesconto;
+    private int percentualDesconto;
+
 }

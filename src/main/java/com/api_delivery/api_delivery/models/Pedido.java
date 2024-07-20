@@ -26,11 +26,19 @@ public class Pedido {
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(name = "fkforma_pagamento_restaurante")
+    private FormaPagamentoRestaurante formaPagamento;
+
+    @ManyToOne
     @JoinColumn(name = "fkentregador")
     private Entregador entregador;
 
     private Double valor;
     private LocalDateTime dataHora;
+    private int statusPedido;
     private Integer avaliacaoRestaurante;
     private Integer avaliacaoEntrega;
+    private String rua;
+    private Integer numero;
+    private String complemento;
 }
