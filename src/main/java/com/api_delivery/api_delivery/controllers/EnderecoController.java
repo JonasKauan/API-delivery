@@ -15,7 +15,7 @@ import java.util.UUID;
 import static org.springframework.http.ResponseEntity.*;
 
 @RestController
-@RequestMapping(value = "/enderecos")
+@RequestMapping("/enderecos")
 @RequiredArgsConstructor
 public class EnderecoController {
     private final EnderecoService service;

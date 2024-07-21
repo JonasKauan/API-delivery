@@ -15,7 +15,7 @@ import java.util.UUID;
 import static org.springframework.http.ResponseEntity.*;
 
 @RestController
-@RequestMapping(value = "/restaurantes")
+@RequestMapping("/restaurantes")
 @RequiredArgsConstructor
 public class RestauranteController {
     private final RestauranteService service;

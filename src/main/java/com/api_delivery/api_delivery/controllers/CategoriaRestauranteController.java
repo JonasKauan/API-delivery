@@ -16,7 +16,7 @@ import static org.springframework.http.ResponseEntity.noContent;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping(value = "/categorias-restaurante")
+@RequestMapping("/categorias-restaurante")
 @RequiredArgsConstructor
 public class CategoriaRestauranteController {
     private final CategoriaRestauranteService service;
