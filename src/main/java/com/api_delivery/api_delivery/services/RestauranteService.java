@@ -66,4 +66,9 @@ public class RestauranteService {
 
         repository.deleteById(id);
     }
+
+    public void atualizarTaxaEntrega(UUID id, double taxaEntrega) {
+        var restaurante = getRestaurantePorId(id);
+        restaurante.setTaxaEntrega(taxaEntrega);
+    }
 }

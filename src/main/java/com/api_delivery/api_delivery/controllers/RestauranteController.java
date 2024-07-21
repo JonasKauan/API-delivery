@@ -47,6 +47,12 @@ public class RestauranteController {
         return ok(service.alterar(id, dto));
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> atualizarTaxa(@PathVariable UUID id, @RequestParam double taxaEntrega) {
+        service.atualizarTaxaEntrega(id, taxaEntrega);
+        return noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarPorId(@PathVariable UUID id) {
         service.deletarPorId(id);
