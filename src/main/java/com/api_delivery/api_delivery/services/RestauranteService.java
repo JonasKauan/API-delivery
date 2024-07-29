@@ -20,6 +20,12 @@ public class RestauranteService {
     private final CategoriaRestauranteService categoriaRestauranteService;
 
     public RestauranteResponse cadastrar(RestauranteRequest dto) {
+        if(repository.existsByEmail(dto.email()))
+            throw new ResponseStatusException(
+                HttpStatus.CONFLICT,
+                "O e-mail fornecido já está em uso"
+            );
+
         var restaurante = new Restaurante();
         var categoria = categoriaRestauranteService.getCategoriaRestaurantePorId(dto.categoriaRestaurante());
 
@@ -49,6 +55,14 @@ public class RestauranteService {
 
     public RestauranteResponse alterar(UUID id, RestauranteRequest dto) {
         var restaurante = getRestaurantePorId(id);
+
+        if(!dto.email().equals(restaurante.getEmail()) && repository.existsByEmail(dto.email()))
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "O e-mail fornecido já está em uso"
+            );
+
+
         var categoria = categoriaRestauranteService.getCategoriaRestaurantePorId(dto.categoriaRestaurante());
 
         restaurante.setCategoriaRestaurante(categoria);
@@ -70,5 +84,6 @@ public class RestauranteService {
     public void atualizarTaxaEntrega(UUID id, double taxaEntrega) {
         var restaurante = getRestaurantePorId(id);
         restaurante.setTaxaEntrega(taxaEntrega);
+        repository.save(restaurante);
     }
 }

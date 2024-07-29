@@ -14,4 +14,6 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, UUID> 
 
     @Query("SELECT r FROM Restaurante r")
     List<RestauranteResponse> findAllResponse();
+
+    boolean existsByEmail(String email);
 }

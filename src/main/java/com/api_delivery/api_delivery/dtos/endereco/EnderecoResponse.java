@@ -1,7 +1,7 @@
 package com.api_delivery.api_delivery.dtos.endereco;
 
 import com.api_delivery.api_delivery.dtos.usuario.UsuarioResponse;
-import com.api_delivery.api_delivery.models.Endereco;
+import com.api_delivery.api_delivery.models.EnderecoUsuario;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -15,7 +15,7 @@ public class EnderecoResponse {
     private final Integer numero;
     private final String complemento;
 
-    public EnderecoResponse(Endereco endereco) {
+    public EnderecoResponse(EnderecoUsuario endereco) {
         this.idEndereco = endereco.getIdEndereco();
         this.usuario = new UsuarioResponse(endereco.getUsuario());
         this.apelido = endereco.getApelido();

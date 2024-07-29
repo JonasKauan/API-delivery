@@ -1,25 +1,15 @@
 package com.api_delivery.api_delivery.models;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
-@Entity
-@Table(name = "endereco")
+@Embeddable
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Endereco {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idEndereco;
-
-    @ManyToOne
-    @JoinColumn(name = "fkusuario")
-    private Usuario usuario;
-    private String apelido;
     private String rua;
     private Integer numero;
     private String complemento;

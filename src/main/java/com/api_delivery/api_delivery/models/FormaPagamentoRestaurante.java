@@ -1,5 +1,6 @@
 package com.api_delivery.api_delivery.models;
 
+import com.api_delivery.api_delivery.enums.TipoFormaPagamento;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +26,9 @@ public class FormaPagamentoRestaurante {
     private Restaurante restaurante;
 
     private int percentualDesconto;
+    private int tipoFormaPagamento;
 
+    public TipoFormaPagamento getTipoFormaPagamento() {
+        return TipoFormaPagamento.valueOf(tipoFormaPagamento);
+    }
 }

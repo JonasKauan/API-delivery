@@ -22,6 +22,8 @@ public class Restaurante {
     private CategoriaRestaurante categoriaRestaurante;
 
     private String nome;
+    private String email;
+    private String senha;
     private LocalDate dataEntradaPlataforma;
     private Double taxaEntrega;
 

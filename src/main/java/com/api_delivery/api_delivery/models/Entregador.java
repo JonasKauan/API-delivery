@@ -33,7 +33,7 @@ public class Entregador {
         if(pedidos == null) return 0.;
 
         var avaliacao = pedidos.stream()
-                .filter(pedido -> pedido.getDataHora().isAfter(LocalDateTime.now().minusDays(90)))
+                .filter(pedido -> pedido.getDataHoraRealizado().isAfter(LocalDateTime.now().minusDays(90)))
                 .mapToDouble(Pedido::getAvaliacaoEntrega)
                 .average();
 
